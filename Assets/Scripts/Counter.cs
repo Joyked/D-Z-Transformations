@@ -8,7 +8,8 @@ public class Counter : MonoBehaviour
 
     private Text _textButton;
     private Button _button;
-    private bool _isWork = true;
+    private bool _isWorkCoroutine;
+    private bool _isStartScorer;
     private int _score;
 
     private void Start()
@@ -18,6 +19,7 @@ public class Counter : MonoBehaviour
         _button = GetComponent<Button>();
         _button.onClick.AddListener(HandleButton);
         StartCoroutine(Scorer());
+        _isWorkCoroutine = true;
     }
 
     private IEnumerator Scorer()
@@ -25,9 +27,9 @@ public class Counter : MonoBehaviour
         float stepInSeconds = 0.5f;
         var wait = new WaitForSeconds(stepInSeconds);
         
-        while (true)
+        while (_isWorkCoroutine)
         {
-            if (_isWork)
+            if (_isStartScorer)
             {
                 _score++;
                 ShowScore();
@@ -43,8 +45,8 @@ public class Counter : MonoBehaviour
 
     private void HandleButton()
     {
-        _isWork = !_isWork;
-        _textButton.text = _isWork ? "STOP" : "START";
+        _isStartScorer = !_isStartScorer;
+        _textButton.text = _isStartScorer ? "STOP" : "START";
     }
 
     private void OnDisable()
