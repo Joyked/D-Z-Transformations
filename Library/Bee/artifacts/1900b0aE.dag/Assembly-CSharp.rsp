@@ -359,15 +359,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/ButtonWorkScore.cs"
-"Assets/Scripts/Scorer.cs"
-"Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
-"Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Runtime/RampAsset.cs"
-"Assets/UnityTechnologies/ParticlePack/Shared/Scripts/AdjustTimeScale.cs"
-"Assets/UnityTechnologies/ParticlePack/Shared/Scripts/ProximityActivate.cs"
-"Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCameraController.cs"
-"Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCharacterMotor.cs"
-"Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Readme.cs"
+"Assets/Scripts/Counter.cs"
 -langversion:9.0
 
 /deterministic
