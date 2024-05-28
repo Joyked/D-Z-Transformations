@@ -1,31 +1,31 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-
 public class ButtonCounter : MonoBehaviour
 {
-    [SerializeField] private Text _textScore;
-
-    private const string _startCommand = "START";
-    private const string _stopCommand = "STOP";
+    private const string StartCommand = "START";
+    private const string StopCommand = "STOP";
 
     private Coroutine _coroutine;
     private Text _textButton;
     private Button _button;
     private bool _isWork;
-    private int _score;
+    private bool _isWorkScoring;
 
-    public int Score => _score;
+    public event Action ScoreEvent; 
+    
+    public int Score { get; private set; }
     
     private void Start()
     {
         _textButton = GetComponentInChildren<Text>();
-        _textButton.text = _startCommand;
+        _textButton.text = StartCommand;
         _button = GetComponent<Button>();
         _button.onClick.AddListener(ClickProcessing);
-        _coroutine = StartCoroutine(Scoring());
+        _isWorkScoring = true;
     }
 
     private IEnumerator Scoring()
@@ -33,11 +33,10 @@ public class ButtonCounter : MonoBehaviour
         float stepInSeconds = 0.5f;
         var wait = new WaitForSeconds(stepInSeconds);
         
-        while (true)
+        while (_isWorkScoring)
         {
-            if (_isWork)
-                _score++;
-            
+            Score++;
+            ScoreEvent?.Invoke();
             yield return wait;
         }
     }
@@ -45,7 +44,17 @@ public class ButtonCounter : MonoBehaviour
     private void ClickProcessing()
     {
         _isWork = !_isWork;
-        _textButton.text = _isWork ? _stopCommand : _startCommand;
+
+        if (_isWork)
+        {
+            _coroutine = StartCoroutine(Scoring());
+            _textButton.text = StopCommand;
+        }
+        else
+        {
+            StopCoroutine(_coroutine);
+            _textButton.text = StartCommand;
+        }
     }
 
     private void OnDisable()
